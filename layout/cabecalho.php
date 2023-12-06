@@ -51,7 +51,10 @@
                             <a class="nav-link" href="./colaboradores.php" aria-disabled="true">Colaboradores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./clientes.php" aria-disabled="true">Novo Item</a>
+                            <a class="nav-link" href="./cep.php" aria-disabled="true">CEP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./pokemon.php" aria-disabled="true">Pokémon</a>
                         </li>
                     </ul>
                 </div>
