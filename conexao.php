@@ -1,11 +1,12 @@
 <?php
 
-$servidor = "locahost";
-$usuario = 'root';
-$senha = '';
-$bd = 'videoaula';
+$servidor = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "videoaula";
 
-$conn = mysqli_connect($servidor, $usuario, $senha) or die("Não foi possível conectar");
-mysqli_select_db($conn, $bd);
+$conexao = mysqli_connect($servidor, $username, $password) or die("Não foi possível conectar ao banco de dados");
+
+mysqli_select_db($conexao, $dbname);
 
 ?>
