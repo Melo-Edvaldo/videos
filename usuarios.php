@@ -119,7 +119,7 @@
                                 ?>
                             </td>
                             <td>
-                                <a class="btn btn-success" href="editarUsuario.php?id=<?php echo $linha["id"]; ?>">Editar</a>
+                                <a class="btn btn-warning" href="editarUsuario.php?id=<?php echo $linha["id"]; ?>">Editar</a>
                                 <a class="btn btn-danger" href="excluirUsuario.php?id=<?php echo $linha["id"]; ?>">Excluir</a>
                             </td>
                         </tr>
