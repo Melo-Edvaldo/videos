@@ -4,6 +4,14 @@
     include "./layout/cabecalho.php";
     include "./conexao.php";
 
+    if(isset($_GET["mensagem"]) && !empty($_GET["mensagem"])) {
+        ?>
+            <div class="alert alert-warning">
+                <?php echo $_GET["mensagem"]; ?>
+            </div>
+        <?php
+    }
+
     if(isset($_POST) && !empty($_POST)) {
         if(empty($_POST["Login"])) { // login está em name
             ?>
@@ -23,7 +31,7 @@
             $nome = $_POST["Nome"];
             $login = $_POST["Login"];
             $senha = hash('sha512', $_POST["Senha"]);
-            $ativo = $_POST["Ativo"] == "on" ? true : false ;
+            $ativo = $_POST["Ativo"] == "on" ? true : false;
             
             $query = "INSERT INTO usuarios (nome, login, senha, ativo) VALUES ('$nome','$login','$senha','$ativo')";
             $resultado = mysqli_query($conexao, $query);
@@ -111,8 +119,8 @@
                                 ?>
                             </td>
                             <td>
-                                <a class="btn btn-success" href=".editarUsuario.php?id=<?php echo $linha["id"]; ?>">Editar</a>
-                                <a class="btn btn-danger" href=".excluirUsuario.php?id=<?php echo $linha["id"]; ?>">Excluir</a>
+                                <a class="btn btn-success" href="editarUsuario.php?id=<?php echo $linha["id"]; ?>">Editar</a>
+                                <a class="btn btn-danger" href="excluirUsuario.php?id=<?php echo $linha["id"]; ?>">Excluir</a>
                             </td>
                         </tr>
                     <?php
