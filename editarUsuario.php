@@ -10,7 +10,7 @@
         // $senha = hash('sha512', $_POST["Senha"]);
         $ativo = $_POST["Ativo"] == "on" ? true : false;
         
-        $query = "UPDATE usuarios SET nome = '$nome', login = '$login', ativo = '$ativo' WHERE id = ".$id["id"];
+        $query = "UPDATE usuarios SET nome = '$nome', login = '$login', ativo = $ativo WHERE id = ".$id;
         $resultado = mysqli_query($conexao, $query);
 
         header("Location: ./usuarios.php?mensagem=Usuário editado com sucesso");
@@ -35,7 +35,6 @@
         exit();
     }
 
-    $titulo = "Editar Usuário";
     include "./layout/cabecalho.php";
 ?>
 
