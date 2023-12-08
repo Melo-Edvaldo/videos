@@ -37,8 +37,18 @@
             $login = $_POST["Login"];
             $senha = hash('sha512', $_POST["Senha"]);
             $ativo = $_POST["Ativo"] == "on" ? true : false;
+
+            if(isset($_FILES["Imagem"]) && !empty($_FILES["Imagem"]))
+            {
+                $imagem = "./img/" . $_FILES["Imagem"]["name"];
+                move_uploaded_file($_FILES["Imagem"]["tmp_name"], $imagem);
+                // echo "Upload realizado com sucesso";
+            } else
+            {
+                $imagem = "";
+            }
             
-            $query = "INSERT INTO usuarios (nome, login, senha, ativo) VALUES ('$nome','$login','$senha','$ativo')";
+            $query = "INSERT INTO usuarios (nome, login, senha, ativo, imagem) VALUES ('$nome', '$login', '$senha', $ativo, '$imagem')";
             $resultado = mysqli_query($conexao, $query);
             if($resultado == 1)
             {
@@ -63,7 +73,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4 offset-4">
-                <form action="./usuarios.php" method="post">
+                <form action="./usuarios.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label>Nome</label>
                         <input type="text" name="Nome" class="form-control" />
@@ -75,6 +85,10 @@
                     <div class="form-group">
                         <label>Senha</label>
                         <input type="password" name="Senha" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Imagem</label>
+                        <input type="file" name="Imagem" class="form-control" accept="image/*" />
                     </div>
                     <div class="form-group">
                         <label>Ativo?</label>
@@ -98,12 +112,13 @@
             <th>Nome</th>
             <th>Login</th>
             <th>Ativo</th>
+            <th>Imagem</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         <?php
-            $query = "SELECT id, nome, login, ativo FROM usuarios ORDER BY id ASC";
+            $query = "SELECT id, nome, login, ativo, imagem FROM usuarios ORDER BY id ASC";
             $dados = mysqli_query($conexao, $query);
             if($dados)
             {
@@ -128,6 +143,9 @@
                                         <?php
                                     }
                                 ?>
+                            </td>
+                            <td>
+                                <img src="<?php echo $linha['imagem']; ?>" width="75" height="75" />
                             </td>
                             <td>
                                 <a class="btn btn-warning" href="editarUsuario.php?id=<?php echo $linha["id"]; ?>">Editar</a>
