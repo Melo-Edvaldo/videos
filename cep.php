@@ -3,11 +3,13 @@
     $logo = "./img/logoPHP.png";
     include "./layout/cabecalho.php";
 
-    if(isset($_GET["cep"]) && !empty($_GET["cep"])) {
+    if(isset($_GET["cep"]) && !empty($_GET["cep"]))
+    {
         $dados = file_get_contents("https://viacep.com.br/ws/" .$_GET["cep"]. "/json/"); // Informação colada do viacep.com.br
         $dados = json_decode($dados, true);
         // print_r($dados);
-    } else {
+    } else
+    {
 
     }
 ?>
@@ -25,14 +27,17 @@
             </form>
 
             <?php
-                if(isset($dados)) {
-                    if(isset($dados["erro"]) && $dados["erro"] == true) {
+                if(isset($dados))
+                {
+                    if(isset($dados["erro"]) && $dados["erro"] == true)
+                    {
                         ?>
                             <div class="alert alert-danger">
                                 Esse CEP não é válido
                             </div>
                         <?php   
-                    } else {
+                    } else
+                    {
             ?>
 
                 <label>CEP Personalizado</label>
@@ -54,15 +59,16 @@
 </div>
 
 <script>
-    function formatarCep(input) {
-    // Remove todos os caracteres não numéricos
-    var cep = input.value.replace(/\D/g, '');
+    function formatarCep(input)
+    {
+        // Remove todos os caracteres não numéricos
+        var cep = input.value.replace(/\D/g, '');
 
-    // Insere os números e traço nos lugares corretos
-    cep = cep.replace(/(\d{5})(\d)/, '$1-$2');
+        // Insere os números e traço nos lugares corretos
+        cep = cep.replace(/(\d{5})(\d)/, '$1-$2');
 
-    // Atualiza o valor do campo de entrada com o telefone formatado
-    input.value = cep;
+        // Atualiza o valor do campo de entrada com o telefone formatado
+        input.value = cep;
     }
 </script>
 

@@ -4,7 +4,8 @@
     include "./layout/cabecalho.php";
     include "./conexao.php";
 
-    if(isset($_GET["mensagem"]) && !empty($_GET["mensagem"])) {
+    if(isset($_GET["mensagem"]) && !empty($_GET["mensagem"]))
+    {
         ?>
             <div class="alert alert-warning">
                 <?php echo $_GET["mensagem"]; ?>
@@ -12,20 +13,24 @@
         <?php
     }
 
-    if(isset($_POST) && !empty($_POST)) {
-        if(empty($_POST["Login"])) { // login está em name
+    if(isset($_POST) && !empty($_POST))
+    {
+        if(empty($_POST["Login"]))
+        { // login está em name
             ?>
                 <div class="alert alert-danger">
                     O campo login não pode estar vazio
                 </div>
             <?php
-        } else if(empty($_POST["Senha"])) {
+        } else if(empty($_POST["Senha"]))
+        {
             ?>
                 <div class="alert alert-danger">
                     O campo senha não pode estar vazio
                 </div>
             <?php
-        } else {
+        } else
+        {
             // include "./conexao.php";
             // $conexao; // -> variável que representa a conexão com o banco de dados
             $nome = $_POST["Nome"];
@@ -35,7 +40,8 @@
             
             $query = "INSERT INTO usuarios (nome, login, senha, ativo) VALUES ('$nome','$login','$senha','$ativo')";
             $resultado = mysqli_query($conexao, $query);
-            if($resultado == 1) {
+            if($resultado == 1)
+            {
                 ?>
                     <div class="alert alert-success">
                         Usuário inserido com sucesso
@@ -43,7 +49,8 @@
                 <?php
             }
         }
-    } else {
+    } else
+    {
         
     }
 ?>
@@ -96,10 +103,12 @@
     </thead>
     <tbody>
         <?php
-            $query = "SELECT id, nome, login, ativo FROM usuarios";
+            $query = "SELECT id, nome, login, ativo FROM usuarios ORDER BY id ASC";
             $dados = mysqli_query($conexao, $query);
-            if($dados) {
-                while($linha = mysqli_fetch_assoc($dados)) {
+            if($dados)
+            {
+                while($linha = mysqli_fetch_assoc($dados))
+                {
                     ?>
                         <tr>
                             <td> <?php echo $linha['id']; ?> </td>
@@ -107,11 +116,13 @@
                             <td> <?php echo $linha['login']; ?></td>
                             <td>
                                 <?php
-                                    if($linha['ativo'] == 1) {
+                                    if($linha['ativo'] == 1)
+                                    {
                                         ?>
                                             <input type="checkbox" disabled checked />
                                         <?php
-                                    } else {
+                                    } else
+                                    {
                                         ?>
                                             <input type="checkbox" disabled />
                                         <?php
